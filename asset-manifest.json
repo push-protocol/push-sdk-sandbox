@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/push-sdk-sandbox/static/js/main.df7ad347.js",
+    "main.js": "/push-sdk-sandbox/static/js/main.e7293774.js",
     "static/media/pushLogo.svg": "/push-sdk-sandbox/static/media/pushLogo.7caf977a683b99898597c8de9a1aaeb5.svg",
     "static/media/light.svg": "/push-sdk-sandbox/static/media/light.33fecbb86fe086ba376f26f5fcfd78b9.svg",
     "static/media/dark.svg": "/push-sdk-sandbox/static/media/dark.1150a494c923f422dc912f7ea77284f3.svg",
     "index.html": "/push-sdk-sandbox/index.html",
-    "main.df7ad347.js.map": "/push-sdk-sandbox/static/js/main.df7ad347.js.map"
+    "main.e7293774.js.map": "/push-sdk-sandbox/static/js/main.e7293774.js.map"
   },
   "entrypoints": [
-    "static/js/main.df7ad347.js"
+    "static/js/main.e7293774.js"
   ]
 }
