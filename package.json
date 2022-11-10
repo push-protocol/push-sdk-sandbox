@@ -1,4 +1,5 @@
 {
+  "homepage" : "https://ethereum-push-notification-service.github.io/push-sdk-sandbox/",
   "name": "push-sdk-sandbox",
   "version": "0.1.0",
   "private": true,
