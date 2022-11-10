@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@nrwl/nx": "^7.8.7",
     "@pushprotocol/restapi": "0.2.1",
     "@pushprotocol/socket": "^0.1.0",
     "@pushprotocol/uiembed": "^0.1.1",

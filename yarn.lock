@@ -1962,11 +1962,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nrwl/nx@^7.8.7":
-  version "7.8.7"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx/-/nx-7.8.7.tgz#a85dc5ab30d33ac6cc2234bbc51e229ad85b9b9b"
-  integrity sha512-a/pOozIT86IIWue6MSwN2EKO4grJ8My7QMl+g535/vrDg75riyBTkWF+nX6VM/JjGz40Y5nFZaX94924cZWt5g==
-
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.8"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.8.tgz#da3383761e2c0c440610819f3204769022a38d12"
