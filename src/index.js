@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ethers } from "ethers";
 import { Web3ReactProvider } from "@web3-react/core";
 import App from './app/app';
@@ -15,9 +15,9 @@ const container = document.getElementById('root');
 render((
   <StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </Web3ReactProvider>
   </StrictMode>
 ), container);
