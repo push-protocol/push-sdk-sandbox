@@ -39,21 +39,21 @@ const Connection = styled.span`
   }
 `;
 
-const SocketTest = () => {  
+const SocketTest = () => {
   const [isLoading, setLoading] = useState(false);
   const [theme, setTheme] = useState('dark');
-  
+
   const {
     epnsSDKSocket,
     feedsSinceLastConnection,
     isSDKSocketConnected,
-    lastConnectionTimestamp
+    lastConnectionTimestamp,
   } = useContext<any>(SocketContext);
 
   const toggleTheme = () => {
-    setTheme(lastTheme => {
-      return lastTheme === 'dark' ? 'light' : 'dark'
-    })
+    setTheme((lastTheme) => {
+      return lastTheme === 'dark' ? 'light' : 'dark';
+    });
   };
 
   const toggleSocketConnection = () => {
@@ -62,34 +62,47 @@ const SocketTest = () => {
     } else {
       epnsSDKSocket?.disconnect();
     }
-  };  
+  };
 
   return (
-      <div>
-        <Header>
-          <h2>Socket Test page</h2>
-          
-          <ThemeSelector>
-            {theme === 'dark' ? <DarkIcon title="Dark" onClick={toggleTheme}/> : <LightIcon title="Light" onClick={toggleTheme}/>}
-          </ThemeSelector>
-        </Header>
-                
-        <TabButtons>
-          <SectionButton onClick={toggleSocketConnection}>{isSDKSocketConnected ? 'Disconnect Socket' : 'Connect Socket'}</SectionButton>
-          <Connection className={isSDKSocketConnected ? 'connected' : 'disconnected'} />
-        </TabButtons>
+    <div>
+      <Header>
+        <h2>Socket Test page</h2>
 
-        <p>{lastConnectionTimestamp ? `Last connected at: ${lastConnectionTimestamp}`: null}</p>
+        <ThemeSelector>
+          {theme === 'dark' ? (
+            <DarkIcon title="Dark" onClick={toggleTheme} />
+          ) : (
+            <LightIcon title="Light" onClick={toggleTheme} />
+          )}
+        </ThemeSelector>
+      </Header>
 
-        <Loader show={isLoading} />
+      <TabButtons>
+        <SectionButton onClick={toggleSocketConnection}>
+          {isSDKSocketConnected ? 'Disconnect Socket' : 'Connect Socket'}
+        </SectionButton>
+        <Connection
+          className={isSDKSocketConnected ? 'connected' : 'disconnected'}
+        />
+      </TabButtons>
 
-        <Section theme={theme}>
-          <p style={{ color: 'green' }}>Socket feeds:</p>
-          <pre style={{ color: 'green' }}>{JSON.stringify(feedsSinceLastConnection, null, 4)}</pre>
-        </Section>
+      <p>
+        {lastConnectionTimestamp
+          ? `Last connected at: ${lastConnectionTimestamp}`
+          : null}
+      </p>
 
-      </div>
+      <Loader show={isLoading} />
+
+      <Section theme={theme}>
+        <p style={{ color: 'green' }}>Socket feeds:</p>
+        <pre style={{ color: 'green' }}>
+          {JSON.stringify(feedsSinceLastConnection, null, 4)}
+        </pre>
+      </Section>
+    </div>
   );
-}
+};
 
 export default SocketTest;

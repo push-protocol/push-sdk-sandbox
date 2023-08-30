@@ -1,16 +1,10 @@
 import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import {
-  Section,
-} from '../components/StyledComponents';
+import { Section } from '../components/StyledComponents';
 import Loader from '../components/Loader';
-import { Web3Context, EnvContext } from '../context';
-
 
 const ChatTest = () => {
-  const { library, account, chainId } = useContext<any>(Web3Context);
-  const { env, isCAIP } = useContext<any>(EnvContext);
   const [isLoading, setLoading] = useState(false);
 
   const NavMenu = styled.div`
@@ -35,8 +29,17 @@ const ChatTest = () => {
           <Link to="/get" className="nav-button">
             USER.GET
           </Link>
+          <Link to="/getUsersBatch" className="nav-button">
+            USER.GETBATCH
+          </Link>
           <Link to="/create" className="nav-button">
             USER.CREATE
+          </Link>
+          <Link to="/authUpdate" className="nav-button">
+            USER.AUTH.UPDATE
+          </Link>
+          <Link to="/updateUserprofile" className="nav-button">
+            USER.PROFILE.UPDATE
           </Link>
           <Link to="/send" className="nav-button">
             CHAT.SEND
@@ -55,6 +58,30 @@ const ChatTest = () => {
           </Link>
           <Link to="/history" className="nav-button">
             CHAT.HISTORY
+          </Link>
+          <Link to="/createGroup" className="nav-button">
+            CHAT.CREATEGROUP
+          </Link>
+          <Link to="/updateGroup" className="nav-button">
+            CHAT.UPDATEGROUP
+          </Link>
+          <Link to="/getGroup" className="nav-button">
+            CHAT.GETGROUP
+          </Link>
+          <Link to="/getGroupAccess" className="nav-button">
+            CHAT.GETGROUPACCESS
+          </Link>
+          <Link to="/addMembersToGroup" className="nav-button">
+            CHAT.ADDMEMBERSTOGROUP
+          </Link>
+          <Link to="/addAdminsToGroup" className="nav-button">
+            CHAT.ADDADMINSTOGROUP
+          </Link>
+          <Link to="/removeMembersFromGroup" className="nav-button">
+            CHAT.REMOVEMEMBERSFROMGROUP
+          </Link>
+          <Link to="/removeAdminsFromGroup" className="nav-button">
+            CHAT.REMOVEADMINSFROMGROUP
           </Link>
         </NavMenu>
       </Section>
