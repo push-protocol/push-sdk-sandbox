@@ -12,26 +12,51 @@ import { walletToPCAIP10 } from '../helpers';
 import ChatTest from './ChatTest';
 
 const GetRequestsTest = () => {
-  const { account } = useContext<any>(Web3Context);
+  const { account: acc, library } = useContext<any>(Web3Context);
   const { env, isCAIP } = useContext<any>(EnvContext);
   const [isLoading, setLoading] = useState(false);
   const [getRequestsResponse, setGetRequestsResponse] = useState<any>('');
+  const [toDecrypt, setToDecrypt] = useState<boolean>(false);
+  const [account, setAccount] = useState<string>(acc);
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
 
+  const updateAccount = (e: React.SyntheticEvent<HTMLElement>) => {
+    setAccount((e.target as HTMLInputElement).value);
+  };
+
+  const updatePage = (e: React.SyntheticEvent<HTMLElement>) => {
+    setPage(parseInt((e.target as HTMLInputElement).value));
+  };
+
+  const updateLimit = (e: React.SyntheticEvent<HTMLElement>) => {
+    setLimit(parseInt((e.target as HTMLInputElement).value));
+  };
+
+  const updateToDecrypt = (e: React.SyntheticEvent<HTMLElement>) => {
+    setToDecrypt((e.target as HTMLInputElement).checked);
+  };
   const testGetRequests = async () => {
     try {
       setLoading(true);
       const user = await PushAPI.user.get({ account: account, env });
       let pvtkey = null;
+      const librarySigner = library.getSigner();
       if (user?.encryptedPrivateKey) {
-        pvtkey = await PushAPI.chat.decryptWithWalletRPCMethod(
-          user.encryptedPrivateKey,
-          account
-        );
+        pvtkey = await PushAPI.chat.decryptPGPKey({
+          encryptedPGPPrivateKey: user.encryptedPrivateKey,
+          account,
+          signer: librarySigner,
+          env,
+        });
       }
       const response = await PushAPI.chat.requests({
         account: isCAIP ? walletToPCAIP10(account) : account,
         pgpPrivateKey: pvtkey,
+        toDecrypt,
         env,
+        page,
+        limit,
       });
 
       setGetRequestsResponse(response);
@@ -50,14 +75,49 @@ const GetRequestsTest = () => {
       <Loader show={isLoading} />
 
       <Section>
-        <SectionItem>
-          <div>
+        <div>
+          <SectionItem>
+            <input
+              type="checkbox"
+              onChange={updateToDecrypt}
+              checked={toDecrypt}
+              style={{ width: 20, height: 20 }}
+            />
+            <label>Decrypt response</label>
+          </SectionItem>
+          <SectionItem style={{ marginTop: 20 }}>
+            <label>account</label>
+            <input
+              type="text"
+              onChange={updateAccount}
+              value={account}
+              style={{ width: 400, height: 30 }}
+            />
+          </SectionItem>
+          <SectionItem style={{ marginTop: 20 }}>
+            <label>page</label>
+            <input
+              type="text"
+              onChange={updatePage}
+              value={page}
+              style={{ width: 400, height: 30 }}
+            />
+          </SectionItem>
+          <SectionItem style={{ marginTop: 20 }}>
+            <label>limit</label>
+            <input
+              type="text"
+              onChange={updateLimit}
+              value={limit}
+              style={{ width: 400, height: 30 }}
+            />
+          </SectionItem>
+          <SectionItem style={{ marginTop: 20 }}>
             <SectionButton onClick={testGetRequests}>
               get requests
             </SectionButton>
-          </div>
-        </SectionItem>
-
+          </SectionItem>
+        </div>
         <SectionItem>
           <div>
             {getRequestsResponse ? (

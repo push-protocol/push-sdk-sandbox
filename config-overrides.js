@@ -15,7 +15,8 @@ module.exports = function override(config, env) {
     path: require.resolve('path-browserify'),
     url: require.resolve('url'),
     util: require.resolve('util/'),
-    stream: require.resolve('stream-browserify')
+    stream: require.resolve('stream-browserify'),
+    zlib: require.resolve("browserify-zlib")
   }
   config.resolve.extensions = [...config.resolve.extensions, '.ts', '.js']
   config.plugins = [

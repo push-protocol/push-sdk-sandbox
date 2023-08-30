@@ -6,18 +6,18 @@ export const Section = styled.section`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme === 'dark' ? '#000' : '#fff'};
+  background-color: ${(props) => (props.theme === 'dark' ? '#000' : '#fff')};
 
   & .headerText {
-    color: ${(props) => props.theme === 'dark' ? '#fff' : '#000'};
+    color: ${(props) => (props.theme === 'dark' ? '#fff' : '#000')};
     font-size: 2rem;
   }
 
   & .subHeaderText {
-    color: ${(props) => props.theme === 'dark' ? '#fff' : '#000'};
+    color: ${(props) => (props.theme === 'dark' ? '#fff' : '#000')};
     font-size: 1.2rem;
   }
-`
+`;
 
 export const SectionItem = styled.div`
   display: flex;
@@ -42,12 +42,12 @@ export const CodeFormatter = styled.pre`
 `;
 
 export const SectionButton = styled.button`
-  font-family: "Source Sans Pro",Arial,sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 16px;
   display: flex;
   margin-right: 15px;
   padding: 15px 20px;
-  background: #674C9F;
+  background: #674c9f;
   border: 0;
   border-radius: 7px;
   box-shadow: rgb(0 0 0 / 52%) 0px 0px 5px;

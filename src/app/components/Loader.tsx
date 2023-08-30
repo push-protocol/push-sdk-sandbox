@@ -1,29 +1,31 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const LoadingOverlay = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
 
-    & .loaderText {
-      font-size: 3rem;
-      color: #fff;
-    }
+  & .loaderText {
+    font-size: 3rem;
+    color: #fff;
+  }
 
-    z-index: 999999;
+  z-index: 999999;
 `;
 
 const LoadingSpinner = styled.div`
   @keyframes spinner {
-    to {transform: rotate(360deg);}
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   &:before {
@@ -39,7 +41,7 @@ const LoadingSpinner = styled.div`
     border-radius: 50%;
     border-top: 4px solid #07d;
     border-right: 2px solid transparent;
-    animation: spinner .6s linear infinite;
+    animation: spinner 0.6s linear infinite;
   }
 `;
 
@@ -47,16 +49,16 @@ interface LoaderProps {
   show?: boolean;
 }
 
-function Loader({ show } : LoaderProps) {
+function Loader({ show }: LoaderProps) {
   if (show) {
     return (
-        <LoadingOverlay>
-            <LoadingSpinner />
-        </LoadingOverlay>
-    )
+      <LoadingOverlay>
+        <LoadingSpinner />
+      </LoadingOverlay>
+    );
   }
 
-  return null; 
+  return null;
 }
 
 export default Loader;

@@ -8,51 +8,80 @@ import {
 import Loader from '../components/Loader';
 import { Web3Context, EnvContext } from '../context';
 import * as PushAPI from '@pushprotocol/restapi';
-import { walletToPCAIP10 } from '../helpers';
 import ChatTest from './ChatTest';
+import { ethers } from 'ethers';
 
 const SendMessageTest = () => {
-  const { account } = useContext<any>(Web3Context);
+  const { account: acc, library } = useContext<any>(Web3Context);
   const { env, isCAIP } = useContext<any>(EnvContext);
   const [isLoading, setLoading] = useState(false);
   const [messageContent, setMessageContent] = useState<string>('');
+  const [messageType, setMessageType] = useState<string>('Text');
   const [receiverAddress, setReceiverAddress] = useState<string>('');
-  const [apiKey, setApiKey] = useState<string>('');
-
   const [sendResponse, setSendResponse] = useState<any>('');
-
+  const [account, setAccount] = useState<string>(acc);
   const updateMessageContent = (e: React.SyntheticEvent<HTMLElement>) => {
     setMessageContent((e.target as HTMLInputElement).value);
   };
-
+  const updateAccount = (e: React.SyntheticEvent<HTMLElement>) => {
+    setAccount((e.target as HTMLInputElement).value);
+  };
   const updateReceiverAddress = (e: React.SyntheticEvent<HTMLElement>) => {
     setReceiverAddress((e.target as HTMLInputElement).value);
   };
 
-  const updateApiKey = (e: React.SyntheticEvent<HTMLElement>) => {
-    setApiKey((e.target as HTMLInputElement).value);
-  };
-
-  const testSendMessage = async () => {
+  const testSendMessage = async (index: number) => {
     try {
       setLoading(true);
-      const user = await PushAPI.user.get({ account: account, env });
-      let pvtkey = null;
-      if (user?.encryptedPrivateKey) {
-        pvtkey = await PushAPI.chat.decryptWithWalletRPCMethod(
-          user.encryptedPrivateKey,
-          account
-        );
+
+      let response;
+      switch (index) {
+        case 0:
+          {
+            const librarySigner = await library.getSigner();
+            response = await PushAPI.chat.send({
+              messageContent,
+              messageType: messageType as
+                | 'Text'
+                | 'Image'
+                | 'File'
+                | 'GIF'
+                | 'MediaEmbed'
+                | 'Meta'
+                | undefined,
+              receiverAddress,
+              signer: librarySigner,
+              env,
+              account,
+            });
+          }
+          break;
+        case 1:
+          {
+            const walletPvtKey =
+              '4f380c43fe3fcb887ce5104cfae4fa049427233855c9003cbb87f720a1d911bc';
+            const Pkey = `0x${walletPvtKey}`;
+            const pvtKeySigner = new ethers.Wallet(Pkey);
+            response = await PushAPI.chat.send({
+              messageContent,
+              messageType: messageType as
+                | 'Text'
+                | 'Image'
+                | 'File'
+                | 'GIF'
+                | 'MediaEmbed'
+                | 'Meta'
+                | undefined,
+              receiverAddress,
+              signer: pvtKeySigner,
+              env,
+              account,
+            });
+          }
+          break;
+        default:
+          break;
       }
-      const response = await PushAPI.chat.send({
-        messageContent,
-        messageType: 'Text',
-        receiverAddress,
-        account: isCAIP ? walletToPCAIP10(account) : account,
-        pgpPrivateKey: pvtkey,
-        apiKey,
-        env,
-      });
 
       setSendResponse(response);
     } catch (e) {
@@ -82,6 +111,59 @@ const SendMessageTest = () => {
               />
             </SectionItem>
             <SectionItem style={{ marginTop: 20 }}>
+              <label>Message Type</label>
+              <div>
+                <input
+                  type="radio"
+                  name="messageType"
+                  value="Text"
+                  checked={messageType === 'Text'}
+                  onChange={() => setMessageType('Text')}
+                />
+                <label>Text</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="messageType"
+                  value="Image"
+                  checked={messageType === 'Image'}
+                  onChange={() => setMessageType('Image')}
+                />
+                <label>Image</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="messageType"
+                  value="File"
+                  checked={messageType === 'File'}
+                  onChange={() => setMessageType('File')}
+                />
+                <label>File</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="messageType"
+                  value="GIF"
+                  checked={messageType === 'GIF'}
+                  onChange={() => setMessageType('GIF')}
+                />
+                <label>GIF ( DEPRECATED )</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="messageType"
+                  value="MediaURL"
+                  checked={messageType === 'MediaURL'}
+                  onChange={() => setMessageType('MediaURL')}
+                />
+                <label>MediaURL</label>
+              </div>
+            </SectionItem>
+            <SectionItem style={{ marginTop: 20 }}>
               <label>Receiver's Address</label>
               <input
                 type="text"
@@ -91,17 +173,22 @@ const SendMessageTest = () => {
               />
             </SectionItem>
             <SectionItem style={{ marginTop: 20 }}>
-              <label>Api Key</label>
+              <label>Account</label>
               <input
                 type="text"
-                onChange={updateApiKey}
-                value={apiKey}
+                onChange={updateAccount}
+                value={account}
                 style={{ width: 400, height: 30 }}
               />
             </SectionItem>
             <SectionItem style={{ marginTop: 20 }}>
-              <SectionButton onClick={testSendMessage}>
-                send message
+              <SectionButton onClick={() => testSendMessage(0)}>
+                send message with library signer
+              </SectionButton>
+            </SectionItem>
+            <SectionItem style={{ marginTop: 20 }}>
+              <SectionButton onClick={() => testSendMessage(1)}>
+                send message with private key signer
               </SectionButton>
             </SectionItem>
           </div>
