@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/push-sdk-sandbox/static/css/main.c4e6189c.css",
-    "main.js": "/push-sdk-sandbox/static/js/main.3e78bc14.js",
+    "main.js": "/push-sdk-sandbox/static/js/main.cdc9989f.js",
     "static/js/208.d9530627.chunk.js": "/push-sdk-sandbox/static/js/208.d9530627.chunk.js",
     "static/js/180.9da5b9bb.chunk.js": "/push-sdk-sandbox/static/js/180.9da5b9bb.chunk.js",
     "static/js/94.34ebee13.chunk.js": "/push-sdk-sandbox/static/js/94.34ebee13.chunk.js",
@@ -53,7 +53,7 @@
     "index.html": "/push-sdk-sandbox/index.html",
     "static/media/dark.svg": "/push-sdk-sandbox/static/media/dark.1150a494c923f422dc912f7ea77284f3.svg",
     "main.c4e6189c.css.map": "/push-sdk-sandbox/static/css/main.c4e6189c.css.map",
-    "main.3e78bc14.js.map": "/push-sdk-sandbox/static/js/main.3e78bc14.js.map",
+    "main.cdc9989f.js.map": "/push-sdk-sandbox/static/js/main.cdc9989f.js.map",
     "208.d9530627.chunk.js.map": "/push-sdk-sandbox/static/js/208.d9530627.chunk.js.map",
     "180.9da5b9bb.chunk.js.map": "/push-sdk-sandbox/static/js/180.9da5b9bb.chunk.js.map",
     "94.34ebee13.chunk.js.map": "/push-sdk-sandbox/static/js/94.34ebee13.chunk.js.map",
@@ -97,6 +97,6 @@
   },
   "entrypoints": [
     "static/css/main.c4e6189c.css",
-    "static/js/main.3e78bc14.js"
+    "static/js/main.cdc9989f.js"
   ]
 }
