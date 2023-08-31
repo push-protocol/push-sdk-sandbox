@@ -117,6 +117,7 @@ const ChatViewComponentTest = () => {
         <label>chatFilterList</label>
         <input
           type="text"
+          placeholder='comma separated cid fo messages'
           onChange={onChangeChatFilterList}
           value={chatFilterList}
           style={{ width: 400, height: 30 }}
