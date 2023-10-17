@@ -28,9 +28,9 @@ const ChatViewComponentTest = () => {
   const onChangeFile = () => {
     setFile(!file);
   };
-  const onChangeisConnected = () => {
-    setIsConnected(!isConnected);
-  };
+  // const onChangeisConnected = () => {
+  //   setIsConnected(!isConnected);
+  // };
    const onChangeMessageInput = () => {
     setMessageInput(!messageInput);
   };
@@ -127,7 +127,7 @@ const ChatViewComponentTest = () => {
       {chatId && limit && (
         <ChatViewComponentCard>
           <ChatViewComponent
-            onClick={() => console.log('BOIIII RETURNNNSSSSS')}
+            onGetTokenClick={() => console.log('BOIIII RETURNNNSSSSS')}
             chatId={chatId}
             limit={limit}
             chatFilterList={chatFilterList ? chatFilterList.split(',') : []}

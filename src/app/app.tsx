@@ -321,7 +321,7 @@ export function App() {
           <Web3Context.Provider value={{ account, active, library, chainId }}>
             <SocketContext.Provider value={socketData}>
               <AccountContext.Provider value={{ pgpPrivateKey, setSpaceId }}>
-                <ChatUIProvider account={account} pgpPrivateKey={pgpPrivateKey} signer={signer} env={env} theme={darkTheme?darkChatTheme:lightChatTheme}>
+                <ChatUIProvider  env={env} theme={darkTheme?darkChatTheme:lightChatTheme}>
                   <SpacesUIProvider spaceUI={spaceUI} theme={customDarkTheme}>
                     <Routes>
                       <Route
